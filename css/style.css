@@ -57,6 +57,7 @@ body:before {
 	display: flex;
 	justify-content: space-between;
 	gap: 20px;
+	padding-bottom: 20px;
 }
 
 .container__item {
@@ -67,14 +68,15 @@ body:before {
 	display: flex;
 	flex-direction: column;
 	transition: all 0.3s ease;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .container__item-title {
 	margin-bottom: 35px;
-  text-align: center;
-  font-weight: 300;
-  padding: 10px 15px;
-  border-radius: 10px;
+	text-align: center;
+	font-weight: 300;
+	padding: 10px 15px;
+	border-radius: 10px;
 }
 
 .container__item-list {
@@ -87,6 +89,8 @@ body:before {
 	padding: 10px 15px;
 	border-radius: 10px;
 	font-size: 18px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	transition: all 0.3s ease;
 }
 
 .container__item-add {
@@ -96,22 +100,69 @@ body:before {
 	border-radius: 10px;
 	padding: 10px 20px;
 	cursor: pointer;
-  align-self: flex-start;
+	align-self: flex-start;
+	border: none;
+	transition: all 0.3s ease;
 }
 
 .container__item--backlog .container__item-title {
-  background-color: rgb(128, 94, 0);
-
+	background-color: rgb(128, 94, 0);
 }
 
 .container__item--progress .container__item-title {
-  background-color: rgb(0, 19, 128);
+	background-color: rgb(0, 19, 128);
 }
 
 .container__item--complete .container__item-title {
-  background-color: rgb(30, 107, 0);
+	background-color: rgb(30, 107, 0);
 }
 
 .container__item--hold .container__item-title {
-  background-color: rgb(134, 0, 0);
+	background-color: rgb(134, 0, 0);
+}
+
+@media (hover: hover) {
+	.container__item:hover {
+		box-shadow: 0 3px 6px rgba(255, 255, 255, 0.16),
+			0 3px 6px rgba(255, 255, 255, 0.23);
+	}
+
+	.container__item-add:hover {
+		background: #333;
+	}
+
+	.container__item-li:hover {
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+		cursor: grab;
+	}
+}
+
+@media (max-width: 991px) {
+	.container__items {
+		flex-wrap: wrap;
+	}
+
+	.container__item {
+		width: calc(100% / 2 - 10px);
+	}
+
+	.container__item-li {
+		font-size: 16px;
+		padding: 10px;
+	}
+
+	.container__item-title {
+		font-size: 21px;
+		padding: 10px;
+	}
+
+	.container__item-add {
+		padding: 10px;
+	}
+}
+
+@media (max-width: 575px) {
+	.container__item {
+		width: 100%;
+	}
 }
