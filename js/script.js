@@ -1,6 +1,7 @@
 window.addEventListener('load', () => {
 	const containerEl = document.querySelector('[data-drag-container]');
-	const containerItemLists = document.querySelectorAll('.container__item-list');
+	const containerItemLists = document.querySelectorAll('[data-drag-list]');
+	const dataAddItems = document.querySelectorAll('[data-add-item]');
 	let containerItemEls;
 
 	let backlogArr = ['Release the course', 'Sit back and relax'],
@@ -56,8 +57,20 @@ window.addEventListener('load', () => {
 			});
 
 			item.addEventListener('focusout', (e) => {
+				const el = e.target;
 				createNewItems();
 				saveLocalStorage();
+
+				if (!el.textContent) {
+					el.remove();
+
+					createNewItems();
+					saveLocalStorage();
+				}
+			});
+
+			item.addEventListener('focus', (e) => {
+				removeActiveClasses();
 			});
 		});
 	}
@@ -72,6 +85,11 @@ window.addEventListener('load', () => {
 		item.appendChild(li);
 	}
 
+	function removeActiveClasses() {
+		containerItemEls.forEach((item) => item.classList.remove('selected'));
+		containerItemLists.forEach((item) => item.classList.remove('drag-over'));
+	}
+
 	containerItemLists.forEach((item) => {
 		item.addEventListener('drop', (e) => {
 			e.preventDefault();
@@ -84,9 +102,7 @@ window.addEventListener('load', () => {
 				el.appendChild(currentItem);
 			}
 
-			containerItemEls.forEach((item) => item.classList.remove('selected'));
-			containerItemLists.forEach((item) => item.classList.remove('drag-over'));
-
+			removeActiveClasses();
 			createNewItems();
 			saveLocalStorage();
 		});
@@ -144,4 +160,21 @@ window.addEventListener('load', () => {
 			el.classList.add('drag-over');
 		}
 	}
+
+	dataAddItems.forEach((item) => {
+		item.addEventListener('click', (e) => {
+			const el = e.target;
+			const parent = el.parentNode;
+			const containerItemLlist = parent.querySelector('.container__item-list');
+			const li = document.createElement('li');
+			li.classList.add('container__item-li');
+			li.setAttribute('data-drag-item', '');
+			li.setAttribute('draggable', 'true');
+			li.setAttribute('contenteditable', 'true');
+			containerItemLlist.appendChild(li);
+
+			createNewItems();
+			saveLocalStorage();
+		});
+	});
 });
