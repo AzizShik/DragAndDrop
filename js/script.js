@@ -10,26 +10,39 @@ window.addEventListener('load', () => {
 
 	let currentItem;
 
-	loadKanbanInfo();
+	if (localStorage.getItem('backlogArr') !== null) {
+		backlogArr = JSON.parse(localStorage.getItem('backlogArr'));
+		progressArr = JSON.parse(localStorage.getItem('progressArr'));
+		completeArr = JSON.parse(localStorage.getItem('completeArr'));
+		holdArr = JSON.parse(localStorage.getItem('holdArr'));
+		loadKanbanInfo();
+	} else {
+		loadKanbanInfo();
+	}
 
 	function loadKanbanInfo() {
 		containerItemLists.forEach((item, idx) => {
-			if (idx === 0) {
-				backlogArr.forEach((arrItem) => {
-					createContainerItem(item, arrItem);
-				});
-			} else if (idx === 1) {
-				progressArr.forEach((arrItem) => {
-					createContainerItem(item, arrItem);
-				});
-			} else if (idx === 2) {
-				completeArr.forEach((arrItem) => {
-					createContainerItem(item, arrItem);
-				});
-			} else if (idx === 3) {
-				holdArr.forEach((arrItem) => {
-					createContainerItem(item, arrItem);
-				});
+			switch (idx) {
+				case 0:
+					backlogArr.forEach((arrItem) => {
+						createContainerItem(item, arrItem);
+					});
+					break;
+				case 1:
+					progressArr.forEach((arrItem) => {
+						createContainerItem(item, arrItem);
+					});
+					break;
+				case 2:
+					completeArr.forEach((arrItem) => {
+						createContainerItem(item, arrItem);
+					});
+					break;
+				case 3:
+					holdArr.forEach((arrItem) => {
+						createContainerItem(item, arrItem);
+					});
+					break;
 			}
 		});
 
@@ -67,6 +80,26 @@ window.addEventListener('load', () => {
 
 			containerItemEls.forEach((item) => item.classList.remove('selected'));
 			containerItemLists.forEach((item) => item.classList.remove('drag-over'));
+
+			containerItemLists.forEach((item, idx) => {
+				const elements = item.querySelectorAll('[data-drag-item]');
+
+				if (idx === 0) {
+					backlogArr = [];
+					pushToArray(backlogArr, elements);
+				} else if (idx === 1) {
+					progressArr = [];
+					pushToArray(progressArr, elements);
+				} else if (idx === 2) {
+					completeArr = [];
+					pushToArray(completeArr, elements);
+				} else if (idx === 3) {
+					holdArr = [];
+					pushToArray(holdArr, elements);
+				}
+			});
+
+			saveLocalStorage();
 		});
 
 		item.addEventListener('dragenter', (e) => {
@@ -81,6 +114,19 @@ window.addEventListener('load', () => {
 			addDragOver(el);
 		});
 	});
+
+	function pushToArray(arr, elements) {
+		elements.forEach((item) => {
+			arr.push(item.textContent);
+		});
+	}
+
+	function saveLocalStorage() {
+		localStorage.setItem('backlogArr', JSON.stringify(backlogArr));
+		localStorage.setItem('progressArr', JSON.stringify(progressArr));
+		localStorage.setItem('completeArr', JSON.stringify(completeArr));
+		localStorage.setItem('holdArr', JSON.stringify(holdArr));
+	}
 
 	function addDragOver(el) {
 		if (el.classList.contains('container__item-li')) {
