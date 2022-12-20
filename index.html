@@ -12,35 +12,35 @@
 
   <div class="container">
     <h1 class="title">Kanban Board</h1>
-    <div class="container__items">
-      <div class="container__item container__item--backlog">
+    <div class="container__items" data-drag-container>
+      <div class="container__item container__item--backlog ">
         <h2 class="container__item-title">Backlog</h2>
-        <ul class="container__item-list">
-          <li class="container__item-li">Release the course</li>
-          <li class="container__item-li">Stir back and relax</li>
+        <ul class="container__item-list custom-scorllbar">
+          <li class="container__item-li" draggable="true" data-drag-item>Release the course</li>
+          <li class="container__item-li" draggable="true" data-drag-item>Sit back and relax</li>
         </ul>
         <button class="container__item-add">+ Add Item</button>
       </div>
-      <div class="container__item container__item--progress">
+      <div class="container__item container__item--progress ">
         <h2 class="container__item-title">In Progress</h2>
-        <ul class="container__item-list">
-          <li class="container__item-li">Work on projects</li>
-          <li class="container__item-li">Listen to music</li>
+        <ul class="container__item-list custom-scorllbar">
+          <li class="container__item-li" draggable="true" data-drag-item>Work on projects</li>
+          <li class="container__item-li" draggable="true" data-drag-item>Listen to music</li>
         </ul>
         <button class="container__item-add">+ Add Item</button>
       </div>
-      <div class="container__item container__item--complete">
+      <div class="container__item container__item--complete ">
         <h2 class="container__item-title">Complete</h2>
-        <ul class="container__item-list">
-          <li class="container__item-li">Being cool</li>
-          <li class="container__item-li">Getting stuff done</li>
+        <ul class="container__item-list custom-scorllbar">
+          <li class="container__item-li" draggable="true" data-drag-item>Being cool</li>
+          <li class="container__item-li" draggable="true" data-drag-item>Getting stuff done</li>
         </ul>
         <button class="container__item-add">+ Add Item</button>
       </div>
-      <div class="container__item container__item--hold">
+      <div class="container__item container__item--hold ">
         <h2 class="container__item-title">On Hold</h2>
-        <ul class="container__item-list">
-          <li class="container__item-li">Being uncool</li>
+        <ul class="container__item-list custom-scorllbar">
+          <li class="container__item-li" draggable="true" data-drag-item>Being uncool </li>
         </ul>
         <button class="container__item-add">+ Add Item</button>
       </div>

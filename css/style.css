@@ -61,7 +61,7 @@ body:before {
 }
 
 .container__item {
-	flex-grow: 1;
+	width: 25%;
 	background-color: rgba(0, 0, 0, 0.5);
 	padding: 15px 15px;
 	border-radius: 10px;
@@ -69,6 +69,16 @@ body:before {
 	flex-direction: column;
 	transition: all 0.3s ease;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.custom-scorllbar::-webkit-scrollbar {
+	background: #000;
+	width: 8px;
+}
+
+.custom-scorllbar::-webkit-scrollbar-thumb {
+	background-color: #fff;
+	border-radius: 2px;
 }
 
 .container__item-title {
@@ -80,7 +90,8 @@ body:before {
 }
 
 .container__item-list {
-	margin-bottom: 25px;
+	min-height: 200px;
+	overflow: auto;
 }
 
 .container__item-li {
@@ -91,6 +102,7 @@ body:before {
 	font-size: 18px;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	transition: all 0.3s ease;
+
 }
 
 .container__item-add {
@@ -120,6 +132,7 @@ body:before {
 .container__item--hold .container__item-title {
 	background-color: rgb(134, 0, 0);
 }
+
 
 @media (hover: hover) {
 	.container__item:hover {
@@ -165,4 +178,10 @@ body:before {
 	.container__item {
 		width: 100%;
 	}
+}
+
+
+.container__item-li.selected {
+	outline: 3px dashed grey;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
