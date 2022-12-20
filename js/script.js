@@ -54,6 +54,11 @@ window.addEventListener('load', () => {
 				el.classList.add('selected');
 				currentItem = el;
 			});
+
+			item.addEventListener('focusout', (e) => {
+				createNewItems();
+				saveLocalStorage();
+			});
 		});
 	}
 
@@ -63,6 +68,7 @@ window.addEventListener('load', () => {
 		li.textContent = arrItem;
 		li.setAttribute('data-drag-item', '');
 		li.setAttribute('draggable', 'true');
+		li.setAttribute('contenteditable', 'true');
 		item.appendChild(li);
 	}
 
@@ -81,24 +87,7 @@ window.addEventListener('load', () => {
 			containerItemEls.forEach((item) => item.classList.remove('selected'));
 			containerItemLists.forEach((item) => item.classList.remove('drag-over'));
 
-			containerItemLists.forEach((item, idx) => {
-				const elements = item.querySelectorAll('[data-drag-item]');
-
-				if (idx === 0) {
-					backlogArr = [];
-					pushToArray(backlogArr, elements);
-				} else if (idx === 1) {
-					progressArr = [];
-					pushToArray(progressArr, elements);
-				} else if (idx === 2) {
-					completeArr = [];
-					pushToArray(completeArr, elements);
-				} else if (idx === 3) {
-					holdArr = [];
-					pushToArray(holdArr, elements);
-				}
-			});
-
+			createNewItems();
 			saveLocalStorage();
 		});
 
@@ -114,6 +103,26 @@ window.addEventListener('load', () => {
 			addDragOver(el);
 		});
 	});
+
+	function createNewItems() {
+		containerItemLists.forEach((item, idx) => {
+			const elements = item.querySelectorAll('[data-drag-item]');
+
+			if (idx === 0) {
+				backlogArr = [];
+				pushToArray(backlogArr, elements);
+			} else if (idx === 1) {
+				progressArr = [];
+				pushToArray(progressArr, elements);
+			} else if (idx === 2) {
+				completeArr = [];
+				pushToArray(completeArr, elements);
+			} else if (idx === 3) {
+				holdArr = [];
+				pushToArray(holdArr, elements);
+			}
+		});
+	}
 
 	function pushToArray(arr, elements) {
 		elements.forEach((item) => {
