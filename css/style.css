@@ -63,7 +63,7 @@ body:before {
 .container__item {
 	width: 25%;
 	background-color: rgba(0, 0, 0, 0.5);
-	padding: 15px 15px;
+	padding: 15px 5px;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
@@ -82,7 +82,7 @@ body:before {
 }
 
 .container__item-title {
-	margin-bottom: 35px;
+	margin-bottom: 20px;
 	text-align: center;
 	font-weight: 300;
 	padding: 10px 15px;
@@ -92,6 +92,10 @@ body:before {
 .container__item-list {
 	min-height: 200px;
 	overflow: auto;
+	border-radius: 10px;
+	transition: all .3s ease;
+	padding: 10px;
+	margin-bottom: 20px;
 }
 
 .container__item-li {
@@ -102,7 +106,6 @@ body:before {
 	font-size: 18px;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	transition: all 0.3s ease;
-
 }
 
 .container__item-add {
@@ -132,7 +135,6 @@ body:before {
 .container__item--hold .container__item-title {
 	background-color: rgb(134, 0, 0);
 }
-
 
 @media (hover: hover) {
 	.container__item:hover {
@@ -180,8 +182,12 @@ body:before {
 	}
 }
 
-
 .container__item-li.selected {
 	outline: 3px dashed grey;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.drag-over {
+	background: rgb(255, 255, 255);
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
