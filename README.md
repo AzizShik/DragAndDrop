@@ -3,6 +3,7 @@
 ## Deploy Link:
 
 https://azizshik.github.io/DragAndDrop/ </br>
+![Drag and Drop](https://user-images.githubusercontent.com/68865224/208737276-3d938fe7-e29f-4e2d-b301-d2146af238f3.gif)
 
 ### Description:
 
