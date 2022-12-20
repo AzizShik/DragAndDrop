@@ -50,28 +50,32 @@ window.addEventListener('load', () => {
 		containerItemEls = document.querySelectorAll('[data-drag-item]');
 
 		containerItemEls.forEach((item) => {
-			item.addEventListener('dragstart', (e) => {
-				const el = e.target;
-				el.classList.add('selected');
-				currentItem = el;
-			});
+			addEventListenersForItems(item);
+		});
+	}
 
-			item.addEventListener('focusout', (e) => {
-				const el = e.target;
-				createNewItems();
+	function addEventListenersForItems(item) {
+		item.addEventListener('dragstart', (e) => {
+			const el = e.target;
+			el.classList.add('selected');
+			currentItem = el;
+		});
+
+		item.addEventListener('input', (e) => {
+			reloadContainerItems();
+			saveLocalStorage();
+		});
+
+		item.addEventListener('focusout', (e) => {
+			const el = e.target;
+			reloadContainerItems();
+			saveLocalStorage();
+			if (!el.textContent) {
+				el.remove();
+				reloadContainerItems();
 				saveLocalStorage();
-
-				if (!el.textContent) {
-					el.remove();
-
-					createNewItems();
-					saveLocalStorage();
-				}
-			});
-
-			item.addEventListener('focus', (e) => {
-				removeActiveClasses();
-			});
+			}
+			removeActiveClasses();
 		});
 	}
 
@@ -103,7 +107,7 @@ window.addEventListener('load', () => {
 			}
 
 			removeActiveClasses();
-			createNewItems();
+			reloadContainerItems();
 			saveLocalStorage();
 		});
 
@@ -120,7 +124,7 @@ window.addEventListener('load', () => {
 		});
 	});
 
-	function createNewItems() {
+	function reloadContainerItems() {
 		containerItemLists.forEach((item, idx) => {
 			const elements = item.querySelectorAll('[data-drag-item]');
 
@@ -173,7 +177,12 @@ window.addEventListener('load', () => {
 			li.setAttribute('contenteditable', 'true');
 			containerItemLlist.appendChild(li);
 
-			createNewItems();
+			containerItemEls = document.querySelectorAll('[data-drag-item]');
+
+			containerItemEls.forEach((item) => {
+				addEventListenersForItems(item);
+			});
+			reloadContainerItems();
 			saveLocalStorage();
 		});
 	});
